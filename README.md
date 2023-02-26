@@ -1,2 +1,3 @@
-# 08-Bsc-student-project-TIM
- Warming on mutualistic systems
+# Warming on resilience of mutualistic systems
+ 
+ A repository that contains R code and writeup for the project.

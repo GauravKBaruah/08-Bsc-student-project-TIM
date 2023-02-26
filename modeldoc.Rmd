@@ -1,0 +1,94 @@
+---
+title: "Warming, resilience and eco-evolutionary feedbacks on mutualistic systems"
+author: "Gaurav Baruah, Tim Lakamper"
+output:
+  tufte::tufte_html: default
+  tufte::tufte_handout: default
+---
+
+## Quantitative genetics and Lotka-Volterra equations
+
+We model the dynamics of pollinators P and plants N in an ecologically relevant quantitative trait $z$ that relates to its optimum temperature. Each individual belonging to a guild of pollinators or plants can be described with its trait $z$, but each of the species belonging to the guild of pollinators or plants are comprised of individuals with different trait values. Now the number of individuals with within species $i$ at time $t$ for pollinators will be $P_i(t)$ and for the plants it will be $N_i(t)$, and the distribution of their traits within each each species $i$ can be given by a function $p_i(z,t)$ and by definition this function satisfies
+
+$$ \int p_i(z,t) dz = 1 $$
+
+at every time $t$; the limits of integration encompass the whole trait axis, which for simplicity we take to go between minus and plus infinity unless otherwise noted. $N_i(t)p_i(z,t)dz$ is then the population density of species i's individuals with phenotype value between $z$ and $z + dz$ for the plants and for the pollinators we can write $P_i(t)p_i(z',t)dz'$ which is the population density with phenotype value betweeen $z'$ and $z'+dz$.
+
+We work in the quantitative genetic limit, i.e., the optimum trait in question is determined by many independent loci. In this case, the following important results hold (Bulmer 1980, Falconer 1981):1) the trait distribution is normal and variance of the trait does not change in response to selection, $$ p_i(z,t) = \frac{1}{\sqrt{2\pi\sigma_i^2}}\exp{\frac{-(z-u_i(t))^2}{2\sigma_i^2} }$$,
+
+where $u_i(t)$ is the mean optimum temperature trait value for the species $i$ and $\sigma_i^2$ is the trait variance. In this scenario, only the mean of the trait responds to selection and the trait variance remains constant. This also means that the distribution of the trait remains normal.
+
+The governing dynamical equations of population dynamics can be written with Lotka-Volterra equations. The per-capita growth rate of pollinator, $r_{i}^{A}$, and plants, $r_{i}^{P}$, can be written as:
+
+\begin{equation}
+r_{i}^{A}(A,z,t) = b_A(z,T) -  \sum_{j}\alpha_{ij}A_{j} + \int \sum_{k} P_k\frac{\gamma(z,z')}{1+ h\gamma(z,z')P_k} p_{k}(z',t)dz'
+\end{equation} 
+And,
+\begin{equation}
+r_{i}^{P}(P,z,t) = b_P(z,T) -  \sum_{j}\alpha_{ij}P_{j} + \int \sum_{k} A_k\frac{\gamma(z,z')}{1+ h\gamma(z,z')A_k} p_{k}(z',t)dz'
+\end{equation} 
+
+where $b_A(z,T), b_P(z,T)$ is the temperature dependent trait specific growth rate independent of competition or mutualistic benefits for an animal and a plant. This means that an individual of a species belonging to a guild will be influenced by the local temperature $T$. $a_{ij}$ is the pairwise competition term among species belonging to each own guild. We could however make this also trait-dependent by brining a function that leads to trait-trait interaction. However, just for simplicity we are going to assume that competition is not influenced by our trait of interest $z$; $\gamma(z,z')$ is the function that captures the mutualistic interactions among individuals. Here, $z$ is the optimum temperature of an individual of a species belonging to a guild say the pollinators, and $z'$ is the optimum temperature of an individual belonging to the plants. We can take this function to be a gaussian: $$\gamma(z,z') = \gamma_{0} \exp{\frac{-(z-z')^2}{w^2}}$$ where, $\gamma_{0}$ is the average strength of mutualistic interactions and $w$ is the width that controls how strongly two individuals interact. If the optimum temperature of the two individuals belonging to two different species namely plants and pollinators are similar, the stronger is the mutualistic benefit. Biologically this means that, if the optimum temperature for plants for flowering and optimum temperature for insects to emerge match, then chances of a mutualistic interaction increases. For instance, one could imagine that this specific mutualistic interaction is occurring due to optimum temperature being similar for both the individuals. Species phenology, i.e., flowering times of insect-pollinated plants are strongly dependent on temperature. Same goes for pollinator emergence which is also suggested to be correlated to monthly temperature. Thus, if optimum species phenotype i.e., plant and pollinator phenology matches then mutualistic interaction would be successful (Hegland et al 2009).
+
+Equation 1 represents the per-capita growth rate of an individual with phenotype $z$ interacting facilitatively with another individual with phenotype $z'$ belonging to a species of another guild and $p_{j}(z',t)$ is the distribution of the trait $z'$. The integration goes over the entire trait space and summed for all the species belonging to a guild. This formulation of the model is special in the sense that growth and mutualistic interactions only depend on the phenotype $z$ but not on species identity.
+
+Now the population dynamics of species $i$ over all trait space $z$ can be written as (shown here for the animals $A$, same equation goes for the plants, $P$):
+
+```{=tex}
+\begin{equation}
+    \frac{dA_{i}}{dt} = A_{i}(t) \int r_{i}^{A}(A,z,t)p_{i}(z,t)dz
+\end{equation}
+```
+Substituting equation 1 into 2 we get
+
+```{=tex}
+\begin{equation}
+    \frac{dA_{i}}{dt} = A_{i}(t) \int \Bigg( b_A(z,T) -  \sum_{j}\alpha_{ij}A_{j} + \int \sum_{k} \frac{\gamma(z,z')P_k}{1+ h\gamma(z,z')P_k} p_{k}(z',t)dz'\Bigg)  p_{i}(z,t)dz
+\end{equation}
+```
+We can further solve equation 3 as:
+
+\begin{equation}
+    \frac{dA_{i}}{dt} = A_{i}(t) \Bigg( \bar{b_{i}} -  \sum_{j}\alpha_{ij}N_{j} + \int\int\sum_{k} \frac{\gamma(z,z')P_k}{1+ h\gamma(z,z')P_k} p_{k}(z',t)p_{i}(z,t)dzdz' \Bigg) 
+\end{equation} where $$\bar{b_{i}} =\int b(z,T) p_{i}(z,t)dz $$
+
+## Temperature and species interactions
+
+Following Amarasekare & Johnson 2017, we model the temperature-dependence of $b_A(z,T)$ using the Gaussian form as (similar equation for the plants but shown here only for the animals):
+
+$$ 
+ b_A(z,T) = \frac{g_i}{(b_w -a_w\mu_i)}\exp(-\frac{(T-z)^2}{2(b_w- a_w\mu_i)^2}) - \kappa_i
+$$
+
+where, $T$ is the current local temperature, $z$ is the phenotype of the individual that defines its optimum temperature, $\kappa_i$ is the extrinsic mortality; $a_w, b_w$ are positive constants that are used so that $b_A(z,T)$ mimic the growth rate as has been observed empirically in response to temperature. The width of this temperature tolerance curve is given by $2(b_w -a_w\mu_i)$ . This width parameter than causes a change in the temperature tolerance curve meaning that species with lower optimum mean phenotypic temperature trait, $\mu_i$ will have wider curves, whereas species with higher optimum trait, $\mu_i$ will have narrower curves.
+
+Thus $$\bar{b_{i}} = \frac{g_i}{(b_w -a_w\mu_i)}\exp(-\frac{(T-\mu_i)^2}{2(b_w- a_w\mu_i)^2 + 2\sigma_i^2})\frac{b_w- a_w\mu_i}{\sqrt{(b_w-a_w\mu_i)^2+\sigma_i^2}} - \kappa_i $$
+
+```{r temperature, echo=FALSE, fig.cap="Trade off between height and breath of optimum phenotypic temperature for species for six species. Adapted from AKesson et al.", out.width = '100%'}
+knitr::include_graphics("temperature_mutualism.png")
+```
+
+
+Since the competition among species within a guild is independent of the phenotype we modelled and from $ \int p_i(z,t) dz = 1$, we get,
+
+$$ \int \sum_{j}\alpha_{ij}A_{j}p_{i}(z,t)dz = \sum_{j}\alpha_{ij}A_{j} $$
+
+Evolutionary dynamics of the mean optimum temperature phenotype $\mu_i^A(t)$ of interest can then be written as and assuming in the quantitative genetic limit,
+
+```{=tex}
+\begin{equation}
+    \frac{du_{i}^A}{dt} = h_{i}^2\int (z-\mu_i^A(t))r_{i}(\vec{N}, z, t) p_{i}(z,t)dz 
+\end{equation}
+```
+where$h_i^2$ is the broad sense heritability, and $\sigma_i^2$ is the genetic variance which here is equal to phenotype variance.
+
+we can further substitute from equation 4 into equation 5 as
+
+```{=tex}
+\begin{equation}
+    \frac{du_{i}^A}{dt} = h_{i}^2\int (z-\mu_i^A(t))b_A(z,T)p_i(z)dz -  \int (z-\mu_i^A)\sum_{j}\alpha_{ij}A_{j}p_i(z)dz + \int \int \sum_{k} (z-\mu_i^A) \frac{\gamma(z,z')P_k}{1+ h\gamma(z,z')P_k} p_{k}(z',t)dz' p_i(z)dz
+\end{equation}
+```
+here, $$ \int (z-\mu_i^A(t)) b_A(z,T) p_i(z) dz = \frac{g_i}{(b_w -a_w\mu_i^A)}\exp(-\frac{(T-\mu_i^A)^2}{2(b_w- a_w\mu_i^A)^2 + 2\sigma_i^2})\frac{ \sigma_i^2(b_w- a_w\mu_i)(T-\mu_i^A) }{ ((b_w-a_w\mu_i^A)^2+\sigma_i^2))^{1.5}} $$
+The superscript $^A$ denotes for animal species. Similar, equation goes for the plant species except for the supercripts and in the mutualistic interaction term where the species density would be replaced by $P$.
+Thus the two eco-evolutionary dynamical equations that would describe the dynamics of a mean quantitative trait $\mu_{i}^A(t)$ and dynamics of a species belonging to a guild, say the pollinators, are equation 4 and equation 6.
